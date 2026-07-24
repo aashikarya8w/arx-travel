@@ -121,14 +121,14 @@ export default function HomePage() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
         </div>
-        <div className="relative z-10 w-full max-w-container-max mx-auto px-margin-desktop pt-24 pb-16">
+        <div className="relative z-10 w-full max-w-container-max mx-auto px-margin-desktop pt-35 pb-16">
           <div className="grid lg:grid-cols-12 gap-16 items-center">
             <div className="lg:col-span-7 space-y-10">
-              <div className="space-y-6">
-                <div className="inline-flex items-center gap-4 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+              <div className="space-y-10">
+                {/* <div className="inline-flex items-center gap-4 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent-orange shadow-[0_0_10px_#f27b21]"></span>
                   <span className="text-white text-[12px] tracking-[0.25em] uppercase font-bold">Explore Beyond Limits</span>
-                </div>
+                </div> */}
                 <h1 className="text-[84px] lg:text-[100px] leading-[0.9] font-black text-white tracking-tight">
                   YOUR JOURNEY,<br />
                   <span className="text-accent-orange">OUR PASSION</span>
