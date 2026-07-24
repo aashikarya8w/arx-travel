@@ -1,118 +1,62 @@
 "use client";
 
 import React, { useState } from "react";
+import Navbar from "./components/Navbar";
+import AuthModal from "./components/auth-modal";
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState<"Stays" | "Flights" | "Experiences">("Stays");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  return (
-    <div className="min-h-screen bg-surface">
-      {/* Navigation Header */}
-      <header
-        id="main-header"
-        className="fixed top-0 w-full z-50 h-[100px] flex items-center justify-between px-margin-desktop transition-all duration-500 backdrop-blur-3xl bg-white/90 border-b border-white/40 shadow-2xl"
-      >
-        <div className="flex items-center gap-16">
-          <a href="#" className="flex items-center">
-            <img
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeLDo0HrKIaOwehfBwqGiKKzkzvFfS1KrWB5JHubjeMPtgbIbu8U-eX3vFijMn-cXc5TSCb1xcN32lZ6zR-3xcksycNzZBhU8Y4NKjWylSPvgZD7astGe4BUrioC44PQf-pixyQLj3kVIYh3InS5J0DUQs8pAG6TQy6rzpgJFwtrOWszDJR_pAMkPSAihyw_EihGPzB6J1S4aF-vRmucmZb_UP4X_WxoLq0xWUPu-jAHm3NW43KUM423Kwu2D4v41iGKejPWo43lk"
-              alt="ARX Travels Logo"
-              className="h-16 w-auto object-contain"
-            />
-          </a>
-          <nav className="hidden lg:flex items-center gap-10">
-            <a href="#" className="relative nav-link text-primary font-bold text-[15px]">
-              Home
-            </a>
-            <div className="relative group">
-              <button className="relative nav-link font-semibold hover:text-primary transition-all duration-300 flex items-center gap-1 text-[15px] text-primary">
-                Tour Packages <span className="material-symbols-outlined text-[18px]">expand_more</span>
-              </button>
-              <div className="mega-menu absolute top-full left-0 mt-6 w-[640px] bg-white/90 backdrop-blur-3xl rounded-3xl p-10 shadow-2xl border border-white/40 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                <div className="grid grid-cols-2 gap-10">
-                  <div>
-                    <h4 className="text-primary mb-6 text-[20px] font-bold">Global Escapes</h4>
-                    <ul className="space-y-4 text-on-surface-variant">
-                      <li className="group/item hover:text-primary transition-colors cursor-pointer flex items-center gap-3">
-                        <span className="material-symbols-outlined text-[20px] text-accent-orange/60 group-hover/item:text-accent-orange">
-                          flight_takeoff
-                        </span>
-                        <span className="font-medium">Europe Grand Tour</span>
-                      </li>
-                      <li className="group/item hover:text-primary transition-colors cursor-pointer flex items-center gap-3">
-                        <span className="material-symbols-outlined text-[20px] text-accent-orange/60 group-hover/item:text-accent-orange">
-                          beach_access
-                        </span>
-                        <span className="font-medium">Maldives Luxury</span>
-                      </li>
-                      <li className="group/item hover:text-primary transition-colors cursor-pointer flex items-center gap-3">
-                        <span className="material-symbols-outlined text-[20px] text-accent-orange/60 group-hover/item:text-accent-orange">
-                          landscape
-                        </span>
-                        <span className="font-medium">Swiss Alps Adventure</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="text-primary mb-6 text-[20px] font-bold">Specialty Cruises</h4>
-                    <ul className="space-y-4 text-on-surface-variant">
-                      <li className="group/item hover:text-primary transition-colors cursor-pointer flex items-center gap-3">
-                        <span className="material-symbols-outlined text-[20px] text-accent-orange/60 group-hover/item:text-accent-orange">
-                          directions_boat
-                        </span>
-                        <span className="font-medium">Mediterranean Blue</span>
-                      </li>
-                      <li className="group/item hover:text-primary transition-colors cursor-pointer flex items-center gap-3">
-                        <span className="material-symbols-outlined text-[20px] text-accent-orange/60 group-hover/item:text-accent-orange">
-                          sailing
-                        </span>
-                        <span className="font-medium">Caribbean Dream</span>
-                      </li>
-                      <li className="group/item hover:text-primary transition-colors cursor-pointer flex items-center gap-3">
-                        <span className="material-symbols-outlined text-[20px] text-accent-orange/60 group-hover/item:text-accent-orange">
-                          ice_skating
-                        </span>
-                        <span className="font-medium">Arctic Expedition</span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+  // 1. SHOW LOGIN PAGE FIRST
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-surface flex flex-col justify-between">
+        {/* Minimal Header */}
+        <header className="w-full py-6 px-6 md:px-16 flex items-center justify-between border-b border-slate-200/60 bg-white/80 backdrop-blur-md">
+          <div className="flex items-center gap-2">
+            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-primary to-accent-orange flex items-center justify-center text-white shadow-md">
+              <span className="material-symbols-outlined text-[22px]">explore</span>
             </div>
-            <a href="#" className="relative nav-link font-semibold hover:text-primary transition-all duration-300 text-[15px] text-primary">
-              Gallery
-            </a>
-            <a href="#" className="relative nav-link font-semibold hover:text-primary transition-all duration-300 text-[15px] text-primary">
-              Reviews
-            </a>
-            <a href="#" className="relative nav-link font-semibold hover:text-primary transition-all duration-300 text-[15px] text-primary">
-              Blog
-            </a>
-            <a href="#" className="relative nav-link font-semibold hover:text-primary transition-all duration-300 text-[15px] text-primary">
-              Contact
-            </a>
-          </nav>
-        </div>
-        <div className="flex items-center gap-8">
-          <div className="hidden xl:flex items-center gap-6 text-on-surface-variant">
-            <span className="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">search</span>
-            <span className="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">favorite</span>
-            <div className="w-10 h-10 rounded-full bg-surface-container overflow-hidden border-2 border-white shadow-sm ring-1 ring-primary/10">
-              <img
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhmObXJ52MdNtQ7Hwxx-4L3HNwDGM0dvGNXR5WLgJ4k3_vwLWlB0AUJ3ISsdgQBnEpSZ5oEVZ3Ho0GKPJYzyqG8jGxnEjXjngme_FnVRtXrEw-JspMIwnW9Ct0YVjnqq8CZqH38ke3UNyLvYY6SmIjLwVjH3gvIcy2oeKuNXKg2gGDfSN-4A2JNJaP_zVk3AoZhEaZe7n_9KTS-FQVtYDFOZlQx7sT2K35jEcBoMB1XA5OBAM8iRAEXXGF1v6-38FuHmV6d-m3_Us"
-                alt="Traveler profile"
-                className="w-full h-full object-cover"
-              />
+            <div className="flex flex-col">
+              <span className="text-[20px] font-black text-primary tracking-tight font-poppins leading-none">
+                ARX<span className="text-accent-orange">.</span>TRAVELS
+              </span>
+              <span className="text-[8px] font-bold uppercase tracking-[0.25em] text-gold-accent font-poppins">
+                Journey Beyond
+              </span>
             </div>
           </div>
-          <button className="bg-accent-orange text-white px-8 py-4 rounded-full text-[15px] shadow-lg hover:scale-105 active:scale-95 transition-all duration-300 font-bold">
-            Plan My Trip
+
+          <button
+            onClick={() => setIsAuthenticated(true)}
+            className="text-xs font-bold text-slate-500 hover:text-primary transition-colors font-poppins"
+          >
+            Continue as Guest &rarr;
           </button>
-        </div>
-      </header>
+        </header>
+
+        {/* Centered Login Component */}
+        <main className="flex-1 flex items-center justify-center px-4 py-12">
+          <AuthModal onLoginSuccess={() => setIsAuthenticated(true)} />
+        </main>
+
+        {/* Footer */}
+        <footer className="py-4 text-center text-xs text-slate-400 border-t border-slate-100">
+          © 2026 ARX Travels. All Rights Reserved.
+        </footer>
+      </div>
+    );
+  }
+
+  // 2. SHOW MAIN HOME PAGE ONCE LOGGED IN
+  return (
+    <div className="min-h-screen bg-surface animate-fade-in">
+      {/* Dynamic Navigation Header */}
+      <Navbar onOpenAuth={() => setIsAuthenticated(false)} />
 
       {/* Hero Section */}
-      <main className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-primary">
+      <main className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-primary pt-24">
         <div className="absolute inset-0 z-0">
           <img
             src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVmv1tFHzWYvdbRNZWY4NhPmHUChszXbN5RywOu8ibOcHooBgro3E8XVxxnpBsbyAYKXs-GRIDNdiYzougvBAeZG8946I23USfCDMVjnsstmYfyIRJ9MmBTBcFJBr15-eSAJA4VTUEDjWJ8vHxqVTjaC7njZFiIyv1GdIooMUsd4oeeiC_am0wqJbwTZF5U5EZl-X65HNWVAa-ZvOivNKP6WDBXFX7WCNgOvRVCeFRL4P-Yj53VyJLRAEOeVB2j8UWsSX0eIelrC8"
@@ -121,55 +65,61 @@ export default function HomePage() {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
         </div>
-        <div className="relative z-10 w-full max-w-container-max mx-auto px-margin-desktop pt-35 pb-16">
+
+        <div className="relative z-10 w-full max-w-container-max mx-auto px-margin-desktop py-16">
           <div className="grid lg:grid-cols-12 gap-16 items-center">
+            {/* Hero Left Content */}
             <div className="lg:col-span-7 space-y-10">
-              <div className="space-y-10">
-                {/* <div className="inline-flex items-center gap-4 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+              <div className="space-y-6">
+                <div className="inline-flex items-center gap-4 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent-orange shadow-[0_0_10px_#f27b21]"></span>
-                  <span className="text-white text-[12px] tracking-[0.25em] uppercase font-bold">Explore Beyond Limits</span>
-                </div> */}
-                <h1 className="text-[84px] lg:text-[100px] leading-[0.9] font-black text-white tracking-tight">
+                  <span className="text-white font-poppins text-[12px] tracking-[0.25em] uppercase font-bold">
+                    Explore Beyond Limits
+                  </span>
+                </div>
+                <h1 className="font-poppins text-[64px] sm:text-[84px] lg:text-[100px] leading-[0.9] font-black text-white tracking-tight drop-shadow-md">
                   YOUR JOURNEY,<br />
                   <span className="text-accent-orange">OUR PASSION</span>
                 </h1>
-                <p className="text-[22px] text-white/90 max-w-xl leading-relaxed font-medium">
+                <p className="text-[20px] sm:text-[22px] text-white/90 max-w-xl leading-relaxed font-medium">
                   Bespoke domestic and international travel experiences curated by global experts for the modern visionary traveler.
                 </p>
               </div>
-              <div className="flex items-center gap-8">
-                <button className="bg-[#0e5a6f] text-white px-10 py-5 rounded-full text-[16px] font-bold shadow-2xl hover:scale-105 hover:bg-accent-orange transition-all duration-300">
+
+              <div className="flex flex-wrap items-center gap-8">
+                <button className="bg-[#0e5a6f] text-white px-10 py-5 rounded-full font-poppins text-[16px] font-bold shadow-2xl hover:scale-105 hover:bg-accent-orange transition-all duration-300">
                   Explore Destinations
                 </button>
-                <button className="group flex items-center gap-4 text-white text-[16px] font-bold hover:text-accent-orange transition-colors">
+                <button className="group flex items-center gap-4 text-white font-poppins text-[16px] font-bold hover:text-accent-orange transition-colors">
                   <span className="w-14 h-14 rounded-full border border-white/40 flex items-center justify-center group-hover:border-accent-orange transition-all bg-white/5 backdrop-blur-sm">
                     <span className="material-symbols-outlined text-[32px]">play_circle</span>
                   </span>
                   Watch Experience
                 </button>
               </div>
-              <div className="flex items-center gap-12 pt-12">
+
+              <div className="flex flex-wrap items-center gap-8 sm:gap-12 pt-8 sm:pt-12">
                 <div className="flex flex-col gap-1">
-                  <span className="text-[32px] text-white font-bold leading-none">50,000+</span>
+                  <span className="font-poppins text-[32px] text-white font-bold leading-none">50,000+</span>
                   <span className="text-white/60 text-[12px] font-bold tracking-widest uppercase">Global Travelers</span>
                 </div>
-                <div className="w-px h-12 bg-white/20"></div>
+                <div className="w-px h-12 bg-white/20 hidden sm:block"></div>
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-[32px] text-white font-bold leading-none">4.9</span>
+                    <span className="font-poppins text-[32px] text-white font-bold leading-none">4.9</span>
                     <span className="material-symbols-outlined text-accent-orange text-[24px]">star</span>
                   </div>
                   <span className="text-white/60 text-[12px] font-bold tracking-widest uppercase">Average Rating</span>
                 </div>
-                <div className="w-px h-12 bg-white/20"></div>
+                <div className="w-px h-12 bg-white/20 hidden sm:block"></div>
                 <div className="flex flex-col gap-1">
-                  <span className="text-[32px] text-white font-bold leading-none">100+</span>
+                  <span className="font-poppins text-[32px] text-white font-bold leading-none">100+</span>
                   <span className="text-white/60 text-[12px] font-bold tracking-widest uppercase">Elite Venues</span>
                 </div>
               </div>
             </div>
 
-            {/* Booking Form */}
+            {/* Interactive Booking Box */}
             <div className="lg:col-span-5 flex justify-end">
               <div className="w-full max-w-[420px] bg-white/10 backdrop-blur-xl rounded-[48px] border border-white/20 p-8 shadow-2xl">
                 <div className="flex bg-black/20 rounded-full p-1.5 mb-8">
@@ -187,13 +137,16 @@ export default function HomePage() {
                     </button>
                   ))}
                 </div>
+
                 <div className="space-y-6">
                   <div>
                     <label className="block text-accent-orange text-[10px] tracking-widest uppercase font-black mb-3">
                       Where are you heading?
                     </label>
                     <div className="relative">
-                      <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/60">explore</span>
+                      <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/60">
+                        explore
+                      </span>
                       <input
                         type="text"
                         placeholder="Search destination"
@@ -201,11 +154,16 @@ export default function HomePage() {
                       />
                     </div>
                   </div>
+
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-accent-orange text-[10px] tracking-widest uppercase font-black mb-3">Arrival</label>
+                      <label className="block text-accent-orange text-[10px] tracking-widest uppercase font-black mb-3">
+                        Arrival
+                      </label>
                       <div className="relative">
-                        <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/60">calendar_today</span>
+                        <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/60">
+                          calendar_today
+                        </span>
                         <input
                           type="text"
                           placeholder="dd-mm-yyyy"
@@ -214,9 +172,13 @@ export default function HomePage() {
                       </div>
                     </div>
                     <div>
-                      <label className="block text-accent-orange text-[10px] tracking-widest uppercase font-black mb-3">Departure</label>
+                      <label className="block text-accent-orange text-[10px] tracking-widest uppercase font-black mb-3">
+                        Departure
+                      </label>
                       <div className="relative">
-                        <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/60">calendar_today</span>
+                        <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/60">
+                          calendar_today
+                        </span>
                         <input
                           type="text"
                           placeholder="dd-mm-yyyy"
@@ -225,10 +187,15 @@ export default function HomePage() {
                       </div>
                     </div>
                   </div>
+
                   <div>
-                    <label className="block text-accent-orange text-[10px] tracking-widest uppercase font-black mb-3">Guests & Tiers</label>
+                    <label className="block text-accent-orange text-[10px] tracking-widest uppercase font-black mb-3">
+                      Guests & Tiers
+                    </label>
                     <div className="relative">
-                      <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/60">person</span>
+                      <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/60">
+                        person
+                      </span>
                       <select className="w-full bg-white/10 border border-white/20 rounded-2xl py-4 pl-12 pr-10 text-white appearance-none focus:outline-none">
                         <option className="text-primary">2 Adults, Luxury Tier</option>
                         <option className="text-primary">1 Adult, Standard Tier</option>
@@ -240,10 +207,12 @@ export default function HomePage() {
                     </div>
                   </div>
                 </div>
-                <button className="w-full mt-10 bg-accent-orange text-white py-5 rounded-2xl font-black text-[16px] flex items-center justify-center gap-3 shadow-lg hover:brightness-110 transition-all">
+
+                <button className="w-full mt-10 bg-accent-orange text-white py-5 rounded-2xl font-black text-[16px] flex items-center justify-center gap-3 shadow-lg hover:brightness-110 transition-all font-poppins">
                   <span className="material-symbols-outlined">search</span>
                   Search Luxury Experiences
                 </button>
+
                 <div className="flex justify-center gap-8 mt-8">
                   <div className="flex items-center gap-2">
                     <span className="material-symbols-outlined text-accent-orange text-[18px]">verified</span>
@@ -260,16 +229,18 @@ export default function HomePage() {
         </div>
       </main>
 
-      {/* Destinations Section */}
+      {/* Top Destinations Section */}
       <section className="py-section-gap bg-[#f7f9fb] overflow-hidden">
         <div className="max-w-container-max mx-auto px-margin-desktop">
           <div className="flex flex-col items-center text-center mb-16">
             <div className="flex items-center gap-4 mb-2">
               <div className="w-12 h-px bg-[#C89B5E]/40"></div>
-              <span className="text-[#C89B5E] text-[12px] tracking-[0.2em] uppercase font-bold">TOP DESTINATIONS</span>
+              <span className="text-[#C89B5E] text-[12px] tracking-[0.2em] uppercase font-bold font-poppins">
+                TOP DESTINATIONS
+              </span>
               <div className="w-12 h-px bg-[#C89B5E]/40"></div>
             </div>
-            <h2 className="font-serif text-[64px] text-[#1D1D1D] font-bold mb-6 tracking-tight">
+            <h2 className="font-serif text-[42px] sm:text-[64px] text-[#1D1D1D] font-bold mb-6 tracking-tight">
               Explore Our Most Loved Destinations
             </h2>
             <div className="mb-6 flex justify-center">
@@ -279,17 +250,16 @@ export default function HomePage() {
               </svg>
             </div>
             <p className="text-[#666666] max-w-2xl leading-relaxed text-[18px]">
-              Discover breathtaking mountains, spiritual escapes, thrilling adventures,<br />
-              and unforgettable experiences curated by ARX Travels.
+              Discover breathtaking mountains, spiritual escapes, thrilling adventures, and unforgettable experiences curated by ARX Travels.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Manali Card */}
             <div className="bg-white rounded-[32px] overflow-hidden shadow-sm border border-surface-container transition-all duration-500 hover:shadow-lg group">
-              <div className="h-[420px] overflow-hidden p-6">
+              <div className="h-[420px] overflow-hidden p-6 bg-slate-100">
                 <img
-                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgcng9IjgiIGZpbGw9IiNlOGVhZWQiLz48cGF0aCBkPSJNMTcwIDEzMCBsMzAgNDAgbDIwLTE1IGw0MCA1NSBIMTQweiIgZmlsbD0iI2JkYzFjNiIvPjxjaXJjbGUgY3g9IjI1MCIgY3k9IjEyMCIgcj0iMTgiIGZpbGw9IiNiZGMxYzYiLz48L3N2Zz4="
+                  src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=1200&q=80"
                   alt="Manali"
                   className="w-full h-full object-cover rounded-[24px] transition-transform duration-1000 group-hover:scale-105"
                 />
@@ -325,9 +295,9 @@ export default function HomePage() {
 
             {/* Rishikesh Card */}
             <div className="bg-white rounded-[32px] overflow-hidden shadow-sm border border-surface-container transition-all duration-500 hover:shadow-lg group">
-              <div className="h-[420px] overflow-hidden p-6">
+              <div className="h-[420px] overflow-hidden p-6 bg-slate-100">
                 <img
-                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIj48cmVjdCB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgcng9IjgiIGZpbGw9IiNlOGVhZWQiLz48cGF0aCBkPSJNMTcwIDEzMCBsMzAgNDAgbDIwLTE1IGw0MCA1NSBIMTQweiIgZmlsbD0iI2JkYzFjNiIvPjxjaXJjbGUgY3g9IjI1MCIgY3k9IjEyMCIgcj0iMTgiIGZpbGw9IiNiZGMxYzYiLz48L3N2Zz4="
+                  src="https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=1200&q=80"
                   alt="Rishikesh"
                   className="w-full h-full object-cover rounded-[24px] transition-transform duration-1000 group-hover:scale-105"
                 />
@@ -365,44 +335,38 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="relative w-full bg-[#f7f9fb] overflow-hidden">
-        <div className="max-w-container-max mx-auto px-margin-desktop pb-16">
+      <footer className="relative w-full bg-[#f7f9fb] overflow-hidden border-t border-[#E8E2D6]">
+        <div className="max-w-container-max mx-auto px-margin-desktop py-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <div className="flex items-center gap-3">
-                  <img
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeLDo0HrKIaOwehfBwqGiKKzkzvFfS1KrWB5JHubjeMPtgbIbu8U-eX3vFijMn-cXc5TSCb1xcN32lZ6zR-3xcksycNzZBhU8Y4NKjWylSPvgZD7astGe4BUrioC44PQf-pixyQLj3kVIYh3InS5J0DUQs8pAG6TQy6rzpgJFwtrOWszDJR_pAMkPSAihyw_EihGPzB6J1S4aF-vRmucmZb_UP4X_WxoLq0xWUPu-jAHm3NW43KUM423Kwu2D4v41iGKejPWo43lk"
-                    alt="ARX Travels Logo"
-                    className="h-20 w-auto object-contain"
-                  />
-                  <div className="flex flex-col">
-                    <span className="font-serif text-[28px] font-black text-[#1E1E1E] leading-none tracking-tighter">ARX TRAVELS</span>
-                    <span className="text-[#C89B5E] text-[10px] font-bold tracking-[0.2em] uppercase">JOURNEY BEYOND LIMITS</span>
-                  </div>
+            <div className="space-y-6">
+              <div className="flex items-center gap-3">
+                <span className="font-serif text-[28px] font-black text-[#1E1E1E] leading-none tracking-tighter">
+                  ARX TRAVELS
+                </span>
+              </div>
+              <p className="text-[#666666] text-[14px] leading-relaxed">
+                Creating unforgettable travel experiences across India with premium packages, trusted guides, and exceptional customer service.
+              </p>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 text-[#666666] text-[14px]">
+                  <span className="material-symbols-outlined text-[#C89B5E] text-[20px]">location_on</span>
+                  <span>Varanasi, Uttar Pradesh, India</span>
                 </div>
-                <p className="text-[#666666] text-[14px] leading-relaxed">
-                  Creating unforgettable travel experiences across India with premium packages, trusted guides, and exceptional customer service.
-                </p>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3 text-[#666666] text-[14px]">
-                    <span className="material-symbols-outlined text-[#C89B5E] text-[20px]">location_on</span>
-                    <span>Varanasi, Uttar Pradesh, India</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-[#666666] text-[14px]">
-                    <span className="material-symbols-outlined text-[#C89B5E] text-[20px]">call</span>
-                    <span>+91 90769 76545</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-[#666666] text-[14px]">
-                    <span className="material-symbols-outlined text-[#C89B5E] text-[20px]">mail</span>
-                    <span>contact@arxtravels.com</span>
-                  </div>
+                <div className="flex items-center gap-3 text-[#666666] text-[14px]">
+                  <span className="material-symbols-outlined text-[#C89B5E] text-[20px]">call</span>
+                  <span>+91 90769 76545</span>
+                </div>
+                <div className="flex items-center gap-3 text-[#666666] text-[14px]">
+                  <span className="material-symbols-outlined text-[#C89B5E] text-[20px]">mail</span>
+                  <span>contact@arxtravels.com</span>
                 </div>
               </div>
             </div>
 
             <div className="space-y-8">
-              <h4 className="font-serif text-[20px] font-bold text-[#1E1E1E] border-b-2 border-[#C89B5E] w-fit pb-1">Quick Links</h4>
+              <h4 className="font-serif text-[20px] font-bold text-[#1E1E1E] border-b-2 border-[#C89B5E] w-fit pb-1">
+                Quick Links
+              </h4>
               <nav className="flex flex-col gap-4">
                 {["Home", "About Us", "Destinations", "Tour Packages", "Gallery", "Testimonials", "Contact Us"].map((link) => (
                   <a key={link} href="#" className="text-[#666666] hover:text-[#C89B5E] transition-colors flex items-center gap-2 text-[15px]">
@@ -412,19 +376,25 @@ export default function HomePage() {
               </nav>
             </div>
 
-            <div className="space-y-8">
-              <h4 className="font-serif text-[20px] font-bold text-[#1E1E1E] border-b-2 border-[#C89B5E] w-fit pb-1">Stay Updated</h4>
-              <p className="text-[#666666] text-[14px]">Subscribe to receive exclusive offers and tour packages.</p>
-              <div className="space-y-4">
-                <div className="relative">
+            <div className="space-y-8 lg:col-span-2">
+              <h4 className="font-serif text-[20px] font-bold text-[#1E1E1E] border-b-2 border-[#C89B5E] w-fit pb-1">
+                Stay Updated
+              </h4>
+              <p className="text-[#666666] text-[14px]">
+                Subscribe to receive exclusive offers, travel tips, and our latest tour packages.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 max-w-md">
+                <div className="relative flex-grow">
                   <input
                     type="email"
                     placeholder="Enter your email address"
                     className="w-full bg-white border border-[#E8E2D6] rounded-xl py-4 px-6 focus:outline-none focus:border-[#C89B5E] transition-all text-[14px]"
                   />
-                  <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-[#666666]">mail</span>
+                  <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-[#666666]">
+                    mail
+                  </span>
                 </div>
-                <button className="w-full bg-[#C89B5E] text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:brightness-110 transition-all shadow-md">
+                <button className="bg-[#C89B5E] text-white px-8 py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:brightness-110 transition-all shadow-md font-poppins">
                   Subscribe <span className="material-symbols-outlined">send</span>
                 </button>
               </div>

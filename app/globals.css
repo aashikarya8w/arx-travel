@@ -1,5 +1,33 @@
 @import "tailwindcss";
 
+/* 1. Map custom theme properties into Tailwind v4 engine */
+@theme {
+  --color-primary: var(--color-primary);
+  --color-primary-container: var(--color-primary-container);
+  --color-on-primary: var(--color-on-primary);
+  --color-secondary: var(--color-secondary);
+  --color-surface: var(--color-surface);
+  --color-surface-container: var(--color-surface-container);
+  --color-surface-container-high: var(--color-surface-container-high);
+  --color-surface-container-highest: var(--color-surface-container-highest);
+  --color-on-surface: var(--color-on-surface);
+  --color-on-surface-variant: var(--color-on-surface-variant);
+  --color-on-background: var(--color-on-background);
+  --color-accent-orange: var(--color-accent-orange);
+  --color-gold-accent: var(--color-gold-accent);
+
+  /* Fonts */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-poppins: 'Poppins', sans-serif;
+
+  /* Spacing & Utilities */
+  --spacing-margin-desktop: 64px;
+  --spacing-container-max: 1400px;
+  --spacing-section-gap: 120px;
+}
+
+/* 2. Define standard CSS Variable Tokens */
 @layer base {
   :root {
     --color-outline-variant: #bfc8cc;
@@ -55,19 +83,89 @@
     --color-accent-orange: #f27b21;
     --color-gold-accent: #c89b5e;
   }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: var(--color-surface);
+    color: var(--color-on-background);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Material Symbols icon sizing setup */
+  .material-symbols-outlined {
+    font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+  }
+
+  .material-symbols-outlined.fill-1 {
+    font-variation-settings: 'FILL' 1;
+  }
 }
 
-/* Custom Spacing Helpers */
-.px-margin-desktop {
-  padding-left: 64px;
-  padding-right: 64px;
+/* 3. Custom Nav Link Animation & Utilities */
+@layer utilities {
+  .px-margin-desktop {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+
+  .max-w-container-max {
+    max-width: 1400px;
+  }
+
+  .py-section-gap {
+    padding-top: 120px;
+    padding-bottom: 120px;
+  }
+
+  .nav-link {
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: var(--color-accent-orange);
+    transition: width 0.3s ease-in-out;
+    border-radius: 9999px;
+  }
+
+  .nav-link:hover::after {
+    width: 100%;
+  }
 }
 
-.max-w-container-max {
-  max-width: 1400px;
+/* 4. Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-.py-section-gap {
-  padding-top: 120px;
-  padding-bottom: 120px;
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c5a059;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8783d;
 }
