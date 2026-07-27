@@ -8,32 +8,29 @@ import Footer from "./components/footer";
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState<"Stays" | "Flights" | "Experiences">("Stays");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [showAuthOverlay, setShowAuthOverlay] = useState(false);
 
   // 1. LOGIN GATE (NO GLOBAL FOOTER / NO NAVBAR)
   if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-[#0a192f] via-[#0e2a38] to-[#0d1b2a] flex flex-col justify-between items-center relative overflow-hidden px-4 py-8">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-tr from-accent-orange/15 to-primary/25 rounded-full blur-[120px] pointer-events-none"></div>
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-[#0a192f] via-[#0e2a38] to-[#0d1b2a] flex flex-col justify-center items-center relative overflow-hidden px-4 py-8">
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-tr from-accent-orange/15 to-primary/25 rounded-full blur-[120px] pointer-events-none"></div>
 
-        <div className="w-full max-w-5xl flex justify-end relative z-20">
-          <button
-            onClick={() => setIsAuthenticated(true)}
-            className="text-xs font-bold text-white/70 hover:text-accent-orange transition-colors font-poppins flex items-center gap-1 py-2 px-4 rounded-full bg-white/5 border border-white/10 backdrop-blur-md"
-          >
-            Continue as Guest &rarr;
-          </button>
+          <div className="w-full max-w-5xl flex justify-end relative z-20 mb-4">
+            <button
+              onClick={() => setIsAuthenticated(true)}
+              className="text-xs font-bold text-white/80 hover:text-accent-orange transition-colors font-poppins flex items-center gap-1 py-2 px-4 rounded-full bg-white/5 border border-white/10 backdrop-blur-md"
+            >
+              Continue as Guest &rarr;
+            </button>
+          </div>
+
+          <main className="w-full max-w-5xl flex items-center justify-center relative z-20">
+            <AuthModal onLoginSuccess={() => setIsAuthenticated(true)} />
+          </main>
         </div>
-
-        <main className="w-full flex-1 flex items-center justify-center relative z-20">
-          <AuthModal onLoginSuccess={() => setIsAuthenticated(true)} />
-        </main>
-
-        <footer className="py-2 text-center text-xs text-white/40 relative z-20 font-poppins">
-          © 2026 ARX Travels. All Rights Reserved.
-        </footer>
-      </div>
-    );
-  }
+      );
+    }
 
   // 2. MAIN APP CONTENT (WITH NAVBAR & GLOBAL FOOTER)
   return (
@@ -804,6 +801,26 @@ export default function HomePage() {
 
       {/* Global Footer Rendered Here */}
       <Footer />
+
+      {/* Modal Popup Overlay when triggered from Navbar */}
+      {showAuthOverlay && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-md animate-fade-in">
+          <div className="relative w-full max-w-5xl">
+            <button
+              onClick={() => setShowAuthOverlay(false)}
+              className="absolute -top-12 right-0 text-white hover:text-accent-orange transition-colors flex items-center gap-1 font-poppins text-xs font-bold"
+            >
+              Close <span className="material-symbols-outlined text-sm">close</span>
+            </button>
+            <AuthModal
+              onLoginSuccess={() => {
+                setShowAuthOverlay(false);
+                setIsAuthenticated(true);
+              }}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -32,7 +32,7 @@ export default function AuthModal({ onLoginSuccess }: AuthModalProps) {
   };
 
   return (
-    <div className="relative w-full max-w-5xl rounded-[36px] overflow-hidden shadow-[0_35px_100px_rgba(0,0,0,0.4)] border border-white/20 grid md:grid-cols-12 min-h-[630px] font-sans backdrop-blur-2xl bg-white/95 my-6 animate-fade-in transition-all duration-500">
+    <div className="relative w-full max-w-5xl rounded-[36px] overflow-hidden shadow-[0_35px_100px_rgba(0,0,0,0.4)] border border-white/20 grid md:grid-cols-12 min-h-[580px] font-sans backdrop-blur-2xl bg-white/95 my-2 animate-fade-in transition-all duration-500">
       
       {/* Ambient Background Glows */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-accent-orange/20 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
@@ -111,10 +111,10 @@ export default function AuthModal({ onLoginSuccess }: AuthModalProps) {
         </div>
       </div>
 
-      {/* RIGHT COLUMN: Animated Interactive Form */}
+      {/* RIGHT COLUMN: Interactive Form Panel */}
       <div className="md:col-span-7 p-8 sm:p-12 flex flex-col justify-center bg-gradient-to-b from-[#f8fafc] via-[#f1f5f9] to-[#e8eef3] relative z-10">
         
-        {/* Animated Sliding Segment Control */}
+        {/* Animated Segment Control */}
         <div className="relative flex bg-slate-200/90 p-1.5 rounded-2xl mb-8 max-w-xs mx-auto md:mx-0 border border-slate-300/60 shadow-inner">
           <div
             className={`absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-white rounded-xl shadow-md border border-slate-200 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
@@ -157,7 +157,7 @@ export default function AuthModal({ onLoginSuccess }: AuthModalProps) {
           </p>
         </div>
 
-        {/* Social Authentication Buttons */}
+        {/* Social Buttons */}
         <div className="grid grid-cols-2 gap-3 mb-6">
           <button
             type="button"
@@ -295,18 +295,6 @@ export default function AuthModal({ onLoginSuccess }: AuthModalProps) {
             </span>
           </button>
         </form>
-
-        <p className="text-center text-[11px] text-slate-500 mt-6 leading-relaxed">
-          By continuing, you agree to ARX Travels&apos;{" "}
-          <a href="#" className="underline hover:text-slate-800">
-            Terms of Service
-          </a>{" "}
-          and{" "}
-          <a href="#" className="underline hover:text-slate-800">
-            Privacy Policy
-          </a>
-          .
-        </p>
       </div>
     </div>
   );

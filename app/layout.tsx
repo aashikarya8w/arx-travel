@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display, Poppins } from "next/font/google";
-import Footer from "./components/footer";
+// import Footer from "./components/footer";
 import "./globals.css";
 
 const inter = Inter({
@@ -46,7 +46,7 @@ export default function RootLayout({
       </head>
       <body className="bg-surface text-on-background font-sans overflow-x-hidden antialiased flex flex-col min-h-screen">
         <div className="flex-grow">{children}</div>
-        <Footer />
+        {/* <Footer /> */}
       </body>
     </html>
   );
