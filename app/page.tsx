@@ -3,20 +3,18 @@
 import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import AuthModal from "./components/auth-modal";
+import Footer from "./components/footer";
 
 export default function HomePage() {
   const [activeTab, setActiveTab] = useState<"Stays" | "Flights" | "Experiences">("Stays");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // 1. INITIAL LOGIN SCREEN (NAVBAR IS HIDDEN)
+  // 1. LOGIN GATE (NO GLOBAL FOOTER / NO NAVBAR)
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-[#0a192f] via-[#0e2a38] to-[#0d1b2a] flex flex-col justify-between items-center relative overflow-hidden px-4 py-8">
-        
-        {/* Animated Background Lighting */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-tr from-accent-orange/15 to-primary/25 rounded-full blur-[120px] pointer-events-none"></div>
 
-        {/* Top Guest Bypass Button */}
         <div className="w-full max-w-5xl flex justify-end relative z-20">
           <button
             onClick={() => setIsAuthenticated(true)}
@@ -26,12 +24,10 @@ export default function HomePage() {
           </button>
         </div>
 
-        {/* Auth Card Modal */}
         <main className="w-full flex-1 flex items-center justify-center relative z-20">
           <AuthModal onLoginSuccess={() => setIsAuthenticated(true)} />
         </main>
 
-        {/* Minimal Footer */}
         <footer className="py-2 text-center text-xs text-white/40 relative z-20 font-poppins">
           © 2026 ARX Travels. All Rights Reserved.
         </footer>
@@ -39,12 +35,12 @@ export default function HomePage() {
     );
   }
 
-  // 2. MAIN WEBSITE CONTENT (REVEALED WITH NAVBAR AFTER AUTH)
+  // 2. MAIN APP CONTENT (WITH NAVBAR & GLOBAL FOOTER)
   return (
     <div className="min-h-screen bg-surface animate-fade-in">
       <Navbar onOpenAuth={() => setIsAuthenticated(false)} />
 
-      {/* Main Hero Section */}
+      {/* Hero Section */}
       <main className="relative min-h-screen w-full flex items-center justify-center overflow-hidden bg-primary pt-24">
         <div className="absolute inset-0 z-0">
           <img
@@ -57,15 +53,15 @@ export default function HomePage() {
 
         <div className="relative z-10 w-full max-w-container-max mx-auto px-margin-desktop pt-24 pb-16">
           <div className="grid lg:grid-cols-12 gap-16 items-center">
-            {/* Hero Text */}
+            {/* Hero Left Content */}
             <div className="lg:col-span-7 space-y-10">
               <div className="space-y-6">
-                <div className="inline-flex items-center gap-4 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+                {/* <div className="inline-flex items-center gap-4 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
                   <span className="w-1.5 h-1.5 rounded-full bg-accent-orange shadow-[0_0_10px_#f27b21]"></span>
                   <span className="text-white font-poppins text-[12px] tracking-[0.25em] uppercase font-bold">
                     Explore Beyond Limits
                   </span>
-                </div>
+                </div> */}
                 <h1 className="font-poppins text-[84px] lg:text-[100px] leading-[0.9] font-black text-white hero-text-shadow tracking-tight">
                   YOUR JOURNEY,<br />
                   <span className="text-accent-orange">OUR PASSION</span>
@@ -87,7 +83,6 @@ export default function HomePage() {
                 </button>
               </div>
 
-              {/* Stats Bar */}
               <div className="flex items-center gap-12 pt-12">
                 <div className="flex flex-col gap-1">
                   <span className="font-poppins text-[32px] text-white font-bold leading-none">50,000+</span>
@@ -109,7 +104,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Interactive Search Widget */}
+            {/* Interactive Search Box */}
             <div className="lg:col-span-5 flex justify-end">
               <div className="w-full max-w-[420px] bg-white/10 backdrop-blur-xl rounded-[48px] border border-white/20 p-8 shadow-2xl animate-fade-up">
                 <div className="flex bg-black/20 rounded-full p-1.5 mb-8">
@@ -174,7 +169,7 @@ export default function HomePage() {
 
                   <div>
                     <label className="block text-accent-orange font-poppins text-[10px] tracking-widest uppercase font-black mb-3">
-                      Guests & Tiers
+                      Guests &amp; Tiers
                     </label>
                     <div className="relative">
                       <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-white/60">person</span>
@@ -807,155 +802,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Comprehensive Footer */}
-      <footer className="relative w-full bg-[#f7f9fb] overflow-hidden font-poppins">
-        <div className="max-w-container-max mx-auto px-margin-desktop pb-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            {/* Column 1 */}
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <div className="flex items-center gap-3">
-                  <img
-                    alt="ARX Travels Logo"
-                    className="h-20 w-auto object-contain"
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeLDo0HrKIaOwehfBwqGiKKzkzvFfS1KrWB5JHubjeMPtgbIbu8U-eX3vFijMn-cXc5TSCb1xcN32lZ6zR-3xcksycNzZBhU8Y4NKjWylSPvgZD7astGe4BUrioC44PQf-pixyQLj3kVIYh3InS5J0DUQs8pAG6TQy6rzpgJFwtrOWszDJR_pAMkPSAihyw_EihGPzB6J1S4aF-vRmucmZb_UP4X_WxoLq0xWUPu-jAHm3NW43KUM423Kwu2D4v41iGKejPWo43lk"
-                  />
-                  <div className="flex flex-col">
-                    <span className="font-serif text-[28px] font-black text-[#1E1E1E] leading-none tracking-tighter">ARX TRAVELS</span>
-                    <span className="text-[#C89B5E] text-[10px] font-bold tracking-[0.2em] uppercase">JOURNEY BEYOND LIMITS</span>
-                  </div>
-                </div>
-                <p className="text-[#666666] text-[14px] leading-relaxed">
-                  Creating unforgettable travel experiences across India with premium packages, trusted guides, and exceptional customer service.
-                </p>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3 text-[#666666] text-[14px]">
-                    <span className="material-symbols-outlined text-[#C89B5E] text-[20px]">location_on</span>
-                    <span>Varanasi, Uttar Pradesh, India</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-[#666666] text-[14px]">
-                    <span className="material-symbols-outlined text-[#C89B5E] text-[20px]">call</span>
-                    <span>+91 90769 76545</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-[#666666] text-[14px]">
-                    <span className="material-symbols-outlined text-[#C89B5E] text-[20px]">mail</span>
-                    <span>contact@arxtravels.com</span>
-                  </div>
-                  <div className="flex items-center gap-3 text-[#666666] text-[14px]">
-                    <span className="material-symbols-outlined text-[#C89B5E] text-[20px]">schedule</span>
-                    <span>Mon - Sat: 9:00 AM - 8:00 PM</span>
-                  </div>
-                </div>
-                <div className="grid grid-cols-2 gap-3 pt-4">
-                  <div className="flex items-center gap-2 p-3 bg-white rounded-lg border border-[#E8E2D6] shadow-sm">
-                    <span className="material-symbols-outlined text-[#C89B5E] text-[18px]">check_circle</span>
-                    <span className="text-[10px] font-bold uppercase leading-tight">Trusted &amp; Safe</span>
-                  </div>
-                  <div className="flex items-center gap-2 p-3 bg-white rounded-lg border border-[#E8E2D6] shadow-sm">
-                    <span className="material-symbols-outlined text-[#C89B5E] text-[18px]">check_circle</span>
-                    <span className="text-[10px] font-bold uppercase leading-tight">Best Price Guarantee</span>
-                  </div>
-                  <div className="flex items-center gap-2 p-3 bg-white rounded-lg border border-[#E8E2D6] shadow-sm">
-                    <span className="material-symbols-outlined text-[#C89B5E] text-[18px]">check_circle</span>
-                    <span className="text-[10px] font-bold uppercase leading-tight">24/7 Support</span>
-                  </div>
-                  <div className="flex items-center gap-2 p-3 bg-white rounded-lg border border-[#E8E2D6] shadow-sm">
-                    <span className="material-symbols-outlined text-[#C89B5E] text-[18px]">check_circle</span>
-                    <span className="text-[10px] font-bold uppercase leading-tight">100% Satisfied</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Column 2 */}
-            <div className="space-y-8">
-              <h4 className="font-serif text-[20px] font-bold text-[#1E1E1E] border-b-2 border-[#C89B5E] w-fit pb-1">Quick Links</h4>
-              <nav className="flex flex-col gap-4">
-                {["Home", "About Us", "Destinations", "Tour Packages", "Gallery", "Testimonials", "Travel Blog", "Contact Us", "FAQs"].map((link) => (
-                  <a key={link} className="text-[#666666] hover:text-[#C89B5E] transition-colors flex items-center gap-2 text-[15px]" href="#">
-                    <span className="text-[#C89B5E] font-bold">&gt;</span> {link}
-                  </a>
-                ))}
-              </nav>
-            </div>
-
-            {/* Column 3 */}
-            <div className="space-y-8">
-              <h4 className="font-serif text-[20px] font-bold text-[#1E1E1E] border-b-2 border-[#C89B5E] w-fit pb-1">Popular Destinations</h4>
-              <div className="space-y-4 mt-8">
-                <div className="flex items-center gap-4 group cursor-pointer">
-                  <div className="w-12 h-12 rounded-full overflow-hidden border border-[#E8E2D6]">
-                    <img alt="Manali" className="w-full h-full object-cover group-hover:scale-110 transition-transform" src="https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=150&q=80" />
-                  </div>
-                  <div>
-                    <p className="text-[14px] font-bold text-[#1E1E1E] group-hover:text-[#C89B5E] transition-colors">Manali</p>
-                    <p className="text-[12px] text-[#666666]">Himachal Pradesh</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 group cursor-pointer">
-                  <div className="w-12 h-12 rounded-full overflow-hidden border border-[#E8E2D6]">
-                    <img alt="Rishikesh" className="w-full h-full object-cover group-hover:scale-110 transition-transform" src="https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=150&q=80" />
-                  </div>
-                  <div>
-                    <p className="text-[14px] font-bold text-[#1E1E1E] group-hover:text-[#C89B5E] transition-colors">Rishikesh</p>
-                    <p className="text-[12px] text-[#666666]">Uttarakhand</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 group cursor-pointer">
-                  <div className="w-12 h-12 rounded-full overflow-hidden border border-[#E8E2D6]">
-                    <img alt="Varanasi" className="w-full h-full object-cover group-hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVmv1tFHzWYvdbRNZWY4NhPmHUChszXbN5RywOu8ibOcHooBgro3E8XVxxnpBsbyAYKXs-GRIDNdiYzougvBAeZG8946I23USfCDMVjnsstmYfyIRJ9MmBTBcFJBr15-eSAJA4VTUEDjWJ8vHxqVTjaC7njZFiIyv1GdIooMUsd4oeeiC_am0wqJbwTZF5U5EZl-X65HNWVAa-ZvOivNKP6WDBXFX7WCNgOvRVCeFRL4P-Yj53VyJLRAEOeVB2j8UWsSX0eIelrC8" />
-                  </div>
-                  <div>
-                    <p className="text-[14px] font-bold text-[#1E1E1E] group-hover:text-[#C89B5E] transition-colors">Varanasi</p>
-                    <p className="text-[12px] text-[#666666]">Uttar Pradesh</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Column 4 */}
-            <div className="space-y-8">
-              <h4 className="font-serif text-[20px] font-bold text-[#1E1E1E] border-b-2 border-[#C89B5E] w-fit pb-1">Stay Updated</h4>
-              <p className="text-[#666666] text-[14px]">Subscribe to receive exclusive offers, travel tips, and latest tour packages.</p>
-              <div className="space-y-4">
-                <div className="relative">
-                  <input className="w-full bg-white border border-[#E8E2D6] rounded-xl py-4 px-6 focus:outline-none focus:border-[#C89B5E] transition-all text-[14px]" placeholder="Enter your email address" type="email" />
-                  <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-[#666666]">mail</span>
-                </div>
-                <button className="w-full bg-[#C89B5E] text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:brightness-110 transition-all shadow-md">
-                  Subscribe <span className="material-symbols-outlined">send</span>
-                </button>
-              </div>
-              <div className="pt-6">
-                <h4 className="font-serif text-[20px] font-bold text-[#1E1E1E] mb-4">Follow Us</h4>
-                <div className="flex gap-3">
-                  {["FB", "IG", "YT", "LI", "WA"].map((social) => (
-                    <a key={social} className="w-10 h-10 rounded-full border border-[#E8E2D6] flex items-center justify-center text-[#666666] hover:bg-[#C89B5E] hover:text-white transition-all text-xs font-bold" href="#">
-                      {social}
-                    </a>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="border-t border-[#E8E2D6] py-6 bg-white">
-          <div className="max-w-container-max mx-auto px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-6 text-[12px] text-[#666666] font-medium">
-            <p>© 2026 ARX Travels. All Rights Reserved.</p>
-            <p>GSTIN: <span className="text-[#C89B5E]">09AAXFA1234B1Z5</span></p>
-            <div className="flex gap-6">
-              <a className="hover:text-[#C89B5E] transition-colors" href="#">Privacy Policy</a>
-              <span className="text-[#E8E2D6]">|</span>
-              <a className="hover:text-[#C89B5E] transition-colors" href="#">Terms &amp; Conditions</a>
-              <span className="text-[#E8E2D6]">|</span>
-              <a className="hover:text-[#C89B5E] transition-colors" href="#">Refund Policy</a>
-              <span className="text-[#E8E2D6]">|</span>
-              <a className="hover:text-[#C89B5E] transition-colors" href="#">Cancellation Policy</a>
-            </div>
-          </div>
-        </div>
-      </footer>
+      {/* Global Footer Rendered Here */}
+      <Footer />
     </div>
   );
 }
